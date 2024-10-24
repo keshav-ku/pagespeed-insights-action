@@ -22,15 +22,9 @@ jobs:
 
       - name: Output PageSpeed Metrics
         run: |
-          echo "デスクトップのパフォーマンス: ${{ steps.run-pagespeed.outputs.desktop_score }}"
-          echo "デスクトップのLCP: ${{ steps.run-pagespeed.outputs.desktop_lcp }}"
-          echo "デスクトップのCLS: ${{ steps.run-pagespeed.outputs.desktop_cls }}"
-          echo "デスクトップのFCP: ${{ steps.run-pagespeed.outputs.desktop_fcp }}"
-          echo "デスクトップのTBT: ${{ steps.run-pagespeed.outputs.desktop_tbt }}"
-          echo "デスクトップのSI: ${{ steps.run-pagespeed.outputs.desktop_speed }}"
-          echo "モバイルのパフォーマンス: ${{ steps.run-pagespeed.outputs.mobile_score }}"
-          echo "モバイルのLCP: ${{ steps.run-pagespeed.outputs.mobile_lcp }}"
-          echo "モバイルのCLS: ${{ steps.run-pagespeed.outputs.mobile_cls }}"
-          echo "モバイルのFCP: ${{ steps.run-pagespeed.outputs.mobile_fcp }}"
-          echo "モバイルのTBT: ${{ steps.run-pagespeed.outputs.mobile_tbt }}"
-          echo "モバイルのSI: ${{ steps.run-pagespeed.outputs.mobile_speed }}"
+          echo "パフォーマンス: ${{ steps.run-pagespeed.outputs.score }}"
+          echo "LCP: ${{ steps.run-pagespeed.outputs.largest-contentful-paint }}"
+          echo "CLS: ${{ steps.run-pagespeed.outputs.cumulative-layout-shift }}"
+          echo "FCP: ${{ steps.run-pagespeed.outputs.first-contentful-paint }}"
+          echo "TBT: ${{ steps.run-pagespeed.outputs.total-blocking-time }}"
+          echo "SI: ${{ steps.run-pagespeed.outputs.speed-index }}"
