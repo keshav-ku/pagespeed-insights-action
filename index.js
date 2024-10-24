@@ -12,13 +12,14 @@ async function run() {
     );
 
     const lighthouseResult = response.data.lighthouseResult;
+    console.log('Lighthouse Result:', JSON.stringify(lighthouseResult, null, 2));
 
     // Extracting relevant metrics
-    const score = lighthouseResult.categories.performance.score * 100;
-    const lcp = lighthouseResult.audits['largest-contentful-paint'].displayValue;
-    const cls = lighthouseResult.audits['cumulative-layout-shift'].displayValue;
-    const fcp = lighthouseResult.audits['first-contentful-paint'].displayValue;
-    const tbt = lighthouseResult.audits['total-blocking-time'].displayValue;
+    const score = lighthouseResult.categories.performance.score !== undefined ? lighthouseResult.categories.performance.score * 100 : 'N/A';
+    const lcp = lighthouseResult.audits['largest-contentful-paint'].displayValue || 'N/A';
+    const cls = lighthouseResult.audits['cumulative-layout-shift'].displayValue || 'N/A';
+    const fcp = lighthouseResult.audits['first-contentful-paint'].displayValue || 'N/A';
+    const tbt = lighthouseResult.audits['total-blocking-time'].displayValue || 'N/A';
 
     // Set outputs for the action
     core.setOutput('score', score);
