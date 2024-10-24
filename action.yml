@@ -11,18 +11,31 @@ inputs:
     required: true
 
 outputs:
-  score:
-    description: "パフォーマンススコア"
-  largest-contentful-paint:
-    description: "Largest Contentful Paint (LCP) in milliseconds"
-  cumulative-layout-shift:
-    description: "Cumulative Layout Shift (CLS) score"
-  first-contentful-paint:
-    description: "First Contentful Paint (FCP) in milliseconds"
-  total-blocking-time:
-    description: "Total Blocking Time (TBT) in milliseconds"
-  speed-index:
-    description: "Speed Index (SI) in seconds"
+  desktop_score:
+    description: "Desktop performance score"
+  desktop_largest-contentful-paint:
+    description: "Largest Contentful Paint (LCP) in milliseconds for desktop"
+  desktop_cumulative-layout-shift:
+    description: "Cumulative Layout Shift (CLS) score for desktop"
+  desktop_first-contentful-paint:
+    description: "First Contentful Paint (FCP) in milliseconds for desktop"
+  desktop_total-blocking-time:
+    description: "Total Blocking Time (TBT) in milliseconds for desktop"
+  desktop_speed-index:
+    description: "Speed Index (SI) in seconds for desktop"
+  mobile_score:
+    description: "Mobile performance score"
+  mobile_largest-contentful-paint:
+    description: "Largest Contentful Paint (LCP) in milliseconds for mobile"
+  mobile_cumulative-layout-shift:
+    description: "Cumulative Layout Shift (CLS) score for mobile"
+  mobile_first-contentful-paint:
+    description: "First Contentful Paint (FCP) in milliseconds for mobile"
+  mobile_total-blocking-time:
+    description: "Total Blocking Time (TBT) in milliseconds for mobile"
+  mobile_speed-index:
+    description: "Speed Index (SI) in seconds for mobile"
+
 
 runs:
   using: "node12"

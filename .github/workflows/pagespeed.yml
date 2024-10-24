@@ -22,9 +22,16 @@ jobs:
 
       - name: Output PageSpeed Metrics
         run: |
-          echo "パフォーマンス: ${{ steps.run-pagespeed.outputs.score }}"
-          echo "LCP: ${{ steps.run-pagespeed.outputs.largest-contentful-paint }}"
-          echo "CLS: ${{ steps.run-pagespeed.outputs.cumulative-layout-shift }}"
-          echo "FCP: ${{ steps.run-pagespeed.outputs.first-contentful-paint }}"
-          echo "TBT: ${{ steps.run-pagespeed.outputs.total-blocking-time }}"
-          echo "SI: ${{ steps.run-pagespeed.outputs.speed-index }}"
+          echo "デスクトップのパフォーマンス: ${{ steps.run-pagespeed.outputs.desktop_score }}"
+          echo "デスクトップのLCP: ${{ steps.run-pagespeed.outputs.desktop_largest-contentful-paint }}"
+          echo "デスクトップのCLS: ${{ steps.run-pagespeed.outputs.desktop_cumulative-layout-shift }}"
+          echo "デスクトップのFCP: ${{ steps.run-pagespeed.outputs.desktop_first-contentful-paint }}"
+          echo "デスクトップのTBT: ${{ steps.run-pagespeed.outputs.desktop_total-blocking-time }}"
+          echo "デスクトップのSI: ${{ steps.run-pagespeed.outputs.desktop_speed-index }}"
+
+          echo "モバイルのパフォーマンス: ${{ steps.run-pagespeed.outputs.mobile_score }}"
+          echo "モバイルのLCP: ${{ steps.run-pagespeed.outputs.mobile_largest-contentful-paint }}"
+          echo "モバイルのCLS: ${{ steps.run-pagespeed.outputs.mobile_cumulative-layout-shift }}"
+          echo "モバイルのFCP: ${{ steps.run-pagespeed.outputs.mobile_first-contentful-paint }}"
+          echo "モバイルのTBT: ${{ steps.run-pagespeed.outputs.mobile_total-blocking-time }}"
+          echo "モバイルのSI: ${{ steps.run-pagespeed.outputs.mobile_speed-index }}"
