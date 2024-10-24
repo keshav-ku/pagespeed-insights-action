@@ -1,0 +1,28 @@
+name: PageSpeed Insights Automation
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-pagespeed:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: run-pagespeed
+        uses: ./
+        with:
+          url: 'https://www.kfc.co.jp/'
+          key: ${{ secrets.GOOGLE_PSI }}
+
+      - name: Output PageSpeed Metrics
+        run: |
+          echo "Score: ${{ steps.run-pagespeed.outputs.score }}"
+          echo "LCP: ${{ steps.run-pagespeed.outputs.largest-contentful-paint }} ms"
+          echo "CLS: ${{ steps.run-pagespeed.outputs.cumulative-layout-shift }} score"
+          echo "FCP: ${{ steps.run-pagespeed.outputs.first-contentful-paint }} ms"
+          echo "TBT: ${{ steps.run-pagespeed.outputs.total-blocking-time }} ms"

@@ -1,0 +1,27 @@
+name: "PageSpeed Insights GitHub Action"
+description: "Get PageSpeed Insights data using Google API"
+author: "yourusername"
+
+inputs:
+  url:
+    description: "The URL to test"
+    required: true
+  key:
+    description: "Google API key"
+    required: true
+
+outputs:
+  score:
+    description: "Overall performance score"
+  largest-contentful-paint:
+    description: "Largest Contentful Paint (LCP) in milliseconds"
+  cumulative-layout-shift:
+    description: "Cumulative Layout Shift (CLS) score"
+  first-contentful-paint:
+    description: "First Contentful Paint (FCP) in milliseconds"
+  total-blocking-time:
+    description: "Total Blocking Time (TBT) in milliseconds"
+
+runs:
+  using: "node12"
+  main: "index.js"
