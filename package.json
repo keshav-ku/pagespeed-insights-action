@@ -2,9 +2,11 @@
   "name": "pagespeed-insights-action",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +16,9 @@
     "axios": "^1.7.7",
     "dotenv": "^16.4.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/node": "^22.7.9",
+    "typescript": "^5.6.3"
+  }
 }
