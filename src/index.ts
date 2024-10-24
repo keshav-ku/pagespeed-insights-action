@@ -21,28 +21,48 @@ async function run(): Promise<void> {
     const url: string = core.getInput('url');
     const apiKey: string = core.getInput('key');
 
-    // Call PageSpeed Insights API
-    const response = await axios.get<{ lighthouseResult: LighthouseResult }>(
-      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}`
+    // Fetch desktop and mobile results
+    const desktopResponse = await axios.get<{ lighthouseResult: LighthouseResult }>(
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=desktop`
+    );
+    const mobileResponse = await axios.get<{ lighthouseResult: LighthouseResult }>(
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=mobile`
     );
 
-    const lighthouseResult = response.data.lighthouseResult;
+    const desktopResult = desktopResponse.data.lighthouseResult;
+    const mobileResult = mobileResponse.data.lighthouseResult;
 
-    // Extracting relevant metrics
-    const score = lighthouseResult.categories.performance.score !== undefined ? lighthouseResult.categories.performance.score * 100 : 'N/A';
-    const lcp = lighthouseResult.audits['largest-contentful-paint'].displayValue || 'N/A';
-    const cls = lighthouseResult.audits['cumulative-layout-shift'].displayValue || 'N/A';
-    const fcp = lighthouseResult.audits['first-contentful-paint'].displayValue || 'N/A';
-    const tbt = lighthouseResult.audits['total-blocking-time'].displayValue || 'N/A';
-    const speed = lighthouseResult.audits['speed-index'].displayValue || 'N/A';
+    // Extract relevant metrics for desktop
+    const desktopScore = desktopResult.categories.performance.score !== undefined ? desktopResult.categories.performance.score * 100 : 'N/A';
+    const desktopLCP = desktopResult.audits['largest-contentful-paint'].displayValue || 'N/A';
+    const desktopCLS = desktopResult.audits['cumulative-layout-shift'].displayValue || 'N/A';
+    const desktopFCP = desktopResult.audits['first-contentful-paint'].displayValue || 'N/A';
+    const desktopTBT = desktopResult.audits['total-blocking-time'].displayValue || 'N/A';
+    const desktopSpeed = desktopResult.audits['speed-index'].displayValue || 'N/A';
 
-    // Set outputs for the action
-    core.setOutput('score', score);
-    core.setOutput('largest-contentful-paint', lcp);
-    core.setOutput('cumulative-layout-shift', cls);
-    core.setOutput('first-contentful-paint', fcp);
-    core.setOutput('total-blocking-time', tbt);
-    core.setOutput('speed-index', speed);
+    // Extract relevant metrics for mobile
+    const mobileScore = mobileResult.categories.performance.score !== undefined ? mobileResult.categories.performance.score * 100 : 'N/A';
+    const mobileLCP = mobileResult.audits['largest-contentful-paint'].displayValue || 'N/A';
+    const mobileCLS = mobileResult.audits['cumulative-layout-shift'].displayValue || 'N/A';
+    const mobileFCP = mobileResult.audits['first-contentful-paint'].displayValue || 'N/A';
+    const mobileTBT = mobileResult.audits['total-blocking-time'].displayValue || 'N/A';
+    const mobileSpeed = mobileResult.audits['speed-index'].displayValue || 'N/A';
+
+    // Set outputs for desktop
+    core.setOutput('desktop_score', desktopScore);
+    core.setOutput('desktop_lcp', desktopLCP);
+    core.setOutput('desktop_cls', desktopCLS);
+    core.setOutput('desktop_fcp', desktopFCP);
+    core.setOutput('desktop_tbt', desktopTBT);
+    core.setOutput('desktop_speed', desktopSpeed);
+
+    // Set outputs for mobile
+    core.setOutput('mobile_score', mobileScore);
+    core.setOutput('mobile_lcp', mobileLCP);
+    core.setOutput('mobile_cls', mobileCLS);
+    core.setOutput('mobile_fcp', mobileFCP);
+    core.setOutput('mobile_tbt', mobileTBT);
+    core.setOutput('mobile_speed', mobileSpeed);
 
   } catch (error) {
     core.setFailed(`Action failed with error: ${error instanceof Error ? error.message : 'Unknown error'}`);
