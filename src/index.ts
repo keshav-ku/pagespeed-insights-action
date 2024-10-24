@@ -29,24 +29,31 @@ async function run(): Promise<void> {
       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=mobile`
     );
 
+    console.log('Desktop Response:', desktopResponse.data);
+    console.log('Mobile Response:', mobileResponse.data);
+
     const desktopResult = desktopResponse.data.lighthouseResult;
     const mobileResult = mobileResponse.data.lighthouseResult;
 
     // Extract relevant metrics for desktop
-    const desktopScore = desktopResult.categories.performance.score !== undefined ? desktopResult.categories.performance.score * 100 : 'N/A';
-    const desktopLCP = desktopResult.audits['largest-contentful-paint'].displayValue || 'N/A';
-    const desktopCLS = desktopResult.audits['cumulative-layout-shift'].displayValue || 'N/A';
-    const desktopFCP = desktopResult.audits['first-contentful-paint'].displayValue || 'N/A';
-    const desktopTBT = desktopResult.audits['total-blocking-time'].displayValue || 'N/A';
-    const desktopSpeed = desktopResult.audits['speed-index'].displayValue || 'N/A';
+    const desktopScore = desktopResult.categories.performance?.score !== undefined ? desktopResult.categories.performance.score * 100 : 'N/A';
+    const desktopLCP = desktopResult.audits['largest-contentful-paint']?.displayValue || 'N/A';
+    const desktopCLS = desktopResult.audits['cumulative-layout-shift']?.displayValue || 'N/A';
+    const desktopFCP = desktopResult.audits['first-contentful-paint']?.displayValue || 'N/A';
+    const desktopTBT = desktopResult.audits['total-blocking-time']?.displayValue || 'N/A';
+    const desktopSpeed = desktopResult.audits['speed-index']?.displayValue || 'N/A';
 
     // Extract relevant metrics for mobile
-    const mobileScore = mobileResult.categories.performance.score !== undefined ? mobileResult.categories.performance.score * 100 : 'N/A';
-    const mobileLCP = mobileResult.audits['largest-contentful-paint'].displayValue || 'N/A';
-    const mobileCLS = mobileResult.audits['cumulative-layout-shift'].displayValue || 'N/A';
-    const mobileFCP = mobileResult.audits['first-contentful-paint'].displayValue || 'N/A';
-    const mobileTBT = mobileResult.audits['total-blocking-time'].displayValue || 'N/A';
-    const mobileSpeed = mobileResult.audits['speed-index'].displayValue || 'N/A';
+    const mobileScore = mobileResult.categories.performance?.score !== undefined ? mobileResult.categories.performance.score * 100 : 'N/A';
+    const mobileLCP = mobileResult.audits['largest-contentful-paint']?.displayValue || 'N/A';
+    const mobileCLS = mobileResult.audits['cumulative-layout-shift']?.displayValue || 'N/A';
+    const mobileFCP = mobileResult.audits['first-contentful-paint']?.displayValue || 'N/A';
+    const mobileTBT = mobileResult.audits['total-blocking-time']?.displayValue || 'N/A';
+    const mobileSpeed = mobileResult.audits['speed-index']?.displayValue || 'N/A';
+
+    // Log the extracted values
+    console.log('Desktop Results:', { desktopScore, desktopLCP, desktopCLS, desktopFCP, desktopTBT, desktopSpeed });
+    console.log('Mobile Results:', { mobileScore, mobileLCP, mobileCLS, mobileFCP, mobileTBT, mobileSpeed });
 
     // Set outputs for desktop
     core.setOutput('desktop_score', desktopScore);
