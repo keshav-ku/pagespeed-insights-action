@@ -17,13 +17,14 @@ jobs:
         id: run-pagespeed
         uses: ./
         with:
-          url: 'https://www.kfc.co.jp/'
+          url: 'https://www.ibjapan.com/'
           key: ${{ secrets.GOOGLE_PSI }}
 
       - name: Output PageSpeed Metrics
         run: |
-          echo "Score: ${{ steps.run-pagespeed.outputs.score }}"
-          echo "LCP: ${{ steps.run-pagespeed.outputs.largest-contentful-paint }} ms"
-          echo "CLS: ${{ steps.run-pagespeed.outputs.cumulative-layout-shift }} score"
-          echo "FCP: ${{ steps.run-pagespeed.outputs.first-contentful-paint }} ms"
-          echo "TBT: ${{ steps.run-pagespeed.outputs.total-blocking-time }} ms"
+          echo "パフォーマンス: ${{ steps.run-pagespeed.outputs.score }}"
+          echo "LCP: ${{ steps.run-pagespeed.outputs.largest-contentful-paint }}"
+          echo "CLS: ${{ steps.run-pagespeed.outputs.cumulative-layout-shift }}"
+          echo "FCP: ${{ steps.run-pagespeed.outputs.first-contentful-paint }}"
+          echo "TBT: ${{ steps.run-pagespeed.outputs.total-blocking-time }}"
+          echo "SI: ${{ steps.run-pagespeed.outputs.speed-index }}"
