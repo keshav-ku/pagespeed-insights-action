@@ -43,22 +43,22 @@ function run() {
             const url = core.getInput('url');
             const apiKey = core.getInput('key');
             // Call PageSpeed Insights API
-            const response = yield axios_1.default.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}`);
-            const lighthouseResult = response.data.lighthouseResult;
+            const desktopResponse = yield axios_1.default.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=desktop`);
+            const desktopResult = desktopResponse.data.lighthouseResult;
             // Extracting relevant metrics
-            const score = lighthouseResult.categories.performance.score !== undefined ? lighthouseResult.categories.performance.score * 100 : 'N/A';
-            const lcp = lighthouseResult.audits['largest-contentful-paint'].displayValue || 'N/A';
-            const cls = lighthouseResult.audits['cumulative-layout-shift'].displayValue || 'N/A';
-            const fcp = lighthouseResult.audits['first-contentful-paint'].displayValue || 'N/A';
-            const tbt = lighthouseResult.audits['total-blocking-time'].displayValue || 'N/A';
-            const speed = lighthouseResult.audits['speed-index'].displayValue || 'N/A';
+            const desktopScore = desktopResult.categories.performance.score !== undefined ? desktopResult.categories.performance.score * 100 : 'N/A';
+            const desktopLcp = desktopResult.audits['largest-contentful-paint'].displayValue || 'N/A';
+            const desktopCls = desktopResult.audits['cumulative-layout-shift'].displayValue || 'N/A';
+            const desktopFcp = desktopResult.audits['first-contentful-paint'].displayValue || 'N/A';
+            const desktopTbt = desktopResult.audits['total-blocking-time'].displayValue || 'N/A';
+            const desktopSpeed = desktopResult.audits['speed-index'].displayValue || 'N/A';
             // Set outputs for the action
-            core.setOutput('score', score);
-            core.setOutput('largest-contentful-paint', lcp);
-            core.setOutput('cumulative-layout-shift', cls);
-            core.setOutput('first-contentful-paint', fcp);
-            core.setOutput('total-blocking-time', tbt);
-            core.setOutput('speed-index', speed);
+            core.setOutput('desktop-score', desktopScore);
+            core.setOutput('largest-contentful-paint', desktopLcp);
+            core.setOutput('cumulative-layout-shift', desktopCls);
+            core.setOutput('first-contentful-paint', desktopFcp);
+            core.setOutput('total-blocking-time', desktopTbt);
+            core.setOutput('speed-index', desktopSpeed);
         }
         catch (error) {
             core.setFailed(`Action failed with error: ${error instanceof Error ? error.message : 'Unknown error'}`);
