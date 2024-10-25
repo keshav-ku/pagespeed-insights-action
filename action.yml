@@ -11,17 +11,17 @@ inputs:
     required: true
 
 outputs:
-  desktop-score:
+  score:
     description: "パフォーマンススコア"
-  desktop-largest-contentful-paint:
+  largest-contentful-paint:
     description: "Largest Contentful Paint (LCP) in milliseconds"
-  desktop-cumulative-layout-shift:
+  cumulative-layout-shift:
     description: "Cumulative Layout Shift (CLS) score"
-  desktop-first-contentful-paint:
+  first-contentful-paint:
     description: "First Contentful Paint (FCP) in milliseconds"
-  desktop-total-blocking-time:
+  total-blocking-time:
     description: "Total Blocking Time (TBT) in milliseconds"
-  desktop-speed-index:
+  speed-index:
     description: "Speed Index (SI) in seconds"
 
 runs:

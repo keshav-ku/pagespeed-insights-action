@@ -37,12 +37,12 @@ async function run(): Promise<void> {
     const desktopSpeed = desktopResult.audits['speed-index'].displayValue || 'N/A';
 
     // Set outputs for the action
-    core.setOutput('desktop-score', desktopScore);
-    core.setOutput('desktop-largest-contentful-paint', desktopLcp);
-    core.setOutput('desktop-cumulative-layout-shift', desktopCls);
-    core.setOutput('desktop-first-contentful-paint', desktopFcp);
-    core.setOutput('desktop-total-blocking-time', desktopTbt);
-    core.setOutput('desktop-speed-index', desktopSpeed);
+    core.setOutput('score', desktopScore);
+    core.setOutput('largest-contentful-paint', desktopLcp);
+    core.setOutput('cumulative-layout-shift', desktopCls);
+    core.setOutput('first-contentful-paint', desktopFcp);
+    core.setOutput('total-blocking-time', desktopTbt);
+    core.setOutput('speed-index', desktopSpeed);
 
   } catch (error) {
     core.setFailed(`Action failed with error: ${error instanceof Error ? error.message : 'Unknown error'}`);
