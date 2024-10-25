@@ -26,7 +26,7 @@ async function run(): Promise<void> {
       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=desktop`
     );
     const mobileResponse = await axios.get<{ lighthouseResult: LighthouseResult }>(
-      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=desktop`
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=mobile`
     );
 
     const desktopResult = desktopResponse.data.lighthouseResult;

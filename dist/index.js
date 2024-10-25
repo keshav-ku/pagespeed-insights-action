@@ -44,7 +44,7 @@ function run() {
             const apiKey = core.getInput('key');
             // PageSpeed Insights APIを呼び出す
             const desktopResponse = yield axios_1.default.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=desktop`);
-            const mobileResponse = yield axios_1.default.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=desktop`);
+            const mobileResponse = yield axios_1.default.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=mobile`);
             const desktopResult = desktopResponse.data.lighthouseResult;
             const mobileResult = mobileResponse.data.lighthouseResult;
             // 関連するメトリクスを抽出
