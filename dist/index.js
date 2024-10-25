@@ -43,7 +43,7 @@ function run() {
             const url = core.getInput('url');
             const apiKey = core.getInput('key');
             // Call PageSpeed Insights API
-            const desktopResponse = yield axios_1.default.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=desktop`);
+            const desktopResponse = yield axios_1.default.get(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=mobile`);
             const desktopResult = desktopResponse.data.lighthouseResult;
             // Extracting relevant metrics
             const desktopScore = desktopResult.categories.performance.score !== undefined ? desktopResult.categories.performance.score * 100 : 'N/A';
