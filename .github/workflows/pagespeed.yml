@@ -11,9 +11,9 @@ jobs:
     strategy:
       matrix:
         url: 
-          - 'https://www.kfc.co.jp/'
-          - 'https://www.mcdonalds.co.jp/'
-          - 'https://www.burgerking.co.jp/'
+          - ${{ secrets.URL_HIKAKU_2 }}
+          - ${{ secrets.URL_HIKAKU_3 }}
+          - ${{ secrets.URL_HIKAKU_4 }}
 
     steps:
       - name: Checkout code
