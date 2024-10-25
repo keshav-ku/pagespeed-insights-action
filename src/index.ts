@@ -23,7 +23,7 @@ async function run(): Promise<void> {
 
     // Call PageSpeed Insights API
     const response = await axios.get<{ lighthouseResult: LighthouseResult }>(
-      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}`
+      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=desktop`
     );
 
     const lighthouseResult = response.data.lighthouseResult;
