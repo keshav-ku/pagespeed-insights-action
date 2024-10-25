@@ -27,6 +27,7 @@ jobs:
           key: ${{ secrets.GOOGLE_PSI }}
 
       - name: Output PageSpeed Metrics
+        id: output_metrics
         run: |
           echo "***************************************************************"
           echo "URL: ${{ matrix.url }}"
@@ -49,4 +50,30 @@ jobs:
           echo "TBT (総ブロッキング時間): ${{ steps.run-pagespeed.outputs.mobile-total-blocking-time }}"
           echo "SI (スピードインデックス): ${{ steps.run-pagespeed.outputs.mobile-speed-index }}"
           echo "***************************************************************"
+          
+          # Prepare the message for Microsoft Teams
+          MESSAGE="Daily PageSpeed Metrics for ${{ matrix.url }}:\n\n"
+          MESSAGE+="**Desktop Performance:** ${{ steps.run-pagespeed.outputs.desktop-score }}%\n"
+          MESSAGE+="LCP: ${{ steps.run-pagespeed.outputs.desktop-largest-contentful-paint }} ms\n"
+          MESSAGE+="CLS: ${{ steps.run-pagespeed.outputs.desktop-cumulative-layout-shift }}\n"
+          MESSAGE+="FCP: ${{ steps.run-pagespeed.outputs.desktop-first-contentful-paint }} ms\n"
+          MESSAGE+="TBT: ${{ steps.run-pagespeed.outputs.desktop-total-blocking-time }} ms\n"
+          MESSAGE+="SI: ${{ steps.run-pagespeed.outputs.desktop-speed-index }} ms\n\n"
+          MESSAGE+="**Mobile Performance:** ${{ steps.run-pagespeed.outputs.mobile-score }}%\n"
+          MESSAGE+="LCP: ${{ steps.run-pagespeed.outputs.mobile-largest-contentful-paint }} ms\n"
+          MESSAGE+="CLS: ${{ steps.run-pagespeed.outputs.mobile-cumulative-layout-shift }}\n"
+          MESSAGE+="FCP: ${{ steps.run-pagespeed.outputs.mobile-first-contentful-paint }} ms\n"
+          MESSAGE+="TBT: ${{ steps.run-pagespeed.outputs.mobile-total-blocking-time }} ms\n"
+          MESSAGE+="SI: ${{ steps.run-pagespeed.outputs.mobile-speed-index }} ms\n"
 
+          echo "MESSAGE<<EOF" >> $GITHUB_ENV
+          echo "$MESSAGE" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Send Metrics to Microsoft Teams
+        env:
+          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          curl -H "Content-Type: application/json" -d '{
+            "text": "${{ env.MESSAGE }}"
+          }' $WEBHOOK_URL
