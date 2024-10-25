@@ -8,6 +8,12 @@ on:
 jobs:
   run-pagespeed:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        url: 
+          - 'https://www.kfc.co.jp/'
+          - 'https://www.mcdonalds.co.jp/'
+          - 'https://www.burgerking.co.jp/'
 
     steps:
       - name: Checkout code
@@ -17,11 +23,13 @@ jobs:
         id: run-pagespeed
         uses: ./
         with:
-          url: 'https://www.ibjapan.com/'
+          url: ${{ matrix.url }}
           key: ${{ secrets.GOOGLE_PSI }}
 
       - name: Output PageSpeed Metrics
         run: |
+        echo "***************************************************************"
+          echo "URL: ${{ matrix.url }}"
           echo "***************************************************************"
           echo "🌐 デスクトップ メトリクス"
           echo "***************************************************************"
