@@ -11,7 +11,7 @@ inputs:
     required: true
 
 outputs:
-  score:
+  desktop-score:
     description: "パフォーマンススコア"
   largest-contentful-paint:
     description: "Largest Contentful Paint (LCP) in milliseconds"

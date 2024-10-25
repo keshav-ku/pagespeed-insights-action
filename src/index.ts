@@ -37,7 +37,7 @@ async function run(): Promise<void> {
     const desktopSpeed = desktopResult.audits['speed-index'].displayValue || 'N/A';
 
     // Set outputs for the action
-    core.setOutput('score', desktopScore);
+    core.setOutput('desktop-score', desktopScore);
     core.setOutput('largest-contentful-paint', desktopLcp);
     core.setOutput('cumulative-layout-shift', desktopCls);
     core.setOutput('first-contentful-paint', desktopFcp);
