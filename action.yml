@@ -1,4 +1,4 @@
-name: "PageSpeed Insights GitHub Action"
+name: "Running PageSpeed Insights..."
 description: "Google APIを使用してPageSpeed Insightsデータを取得する"
 author: "ケーシャブ"
 
