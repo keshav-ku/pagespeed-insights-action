@@ -22,19 +22,19 @@ async function run(): Promise<void> {
     const apiKey: string = core.getInput('key');
 
     // Call PageSpeed Insights API
-    const response = await axios.get<{ lighthouseResult: LighthouseResult }>(
+    const desktopResponse = await axios.get<{ lighthouseResult: LighthouseResult }>(
       `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=desktop`
     );
 
-    const lighthouseResult = response.data.lighthouseResult;
+    const lighthouseResult1 = desktopResponse.data.lighthouseResult;
 
     // Extracting relevant metrics
-    const score = lighthouseResult.categories.performance.score !== undefined ? lighthouseResult.categories.performance.score * 100 : 'N/A';
-    const lcp = lighthouseResult.audits['largest-contentful-paint'].displayValue || 'N/A';
-    const cls = lighthouseResult.audits['cumulative-layout-shift'].displayValue || 'N/A';
-    const fcp = lighthouseResult.audits['first-contentful-paint'].displayValue || 'N/A';
-    const tbt = lighthouseResult.audits['total-blocking-time'].displayValue || 'N/A';
-    const speed = lighthouseResult.audits['speed-index'].displayValue || 'N/A';
+    const score = lighthouseResult1.categories.performance.score !== undefined ? lighthouseResult1.categories.performance.score * 100 : 'N/A';
+    const lcp = lighthouseResult1.audits['largest-contentful-paint'].displayValue || 'N/A';
+    const cls = lighthouseResult1.audits['cumulative-layout-shift'].displayValue || 'N/A';
+    const fcp = lighthouseResult1.audits['first-contentful-paint'].displayValue || 'N/A';
+    const tbt = lighthouseResult1.audits['total-blocking-time'].displayValue || 'N/A';
+    const speed = lighthouseResult1.audits['speed-index'].displayValue || 'N/A';
 
     // Set outputs for the action
     core.setOutput('score', score);
